@@ -5,8 +5,8 @@ const { Diet } = require('../db');
 router.get('/', async (req, res) => {
     try{
         let typesDiet = await Diet.findAll();
-        let diets = typesDiets.map(type => type.dataValues.name)
-        res.status(200).json(types);
+
+        res.status(200).json(typesDiet);
     } catch (error){
         console.log(error);
     }
