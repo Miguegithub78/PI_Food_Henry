@@ -32,5 +32,9 @@ module.exports = (sequelize) => {
     Steps: {
       type: DataTypes.TEXT
     }
-  });
+    
+  },
+  {
+    timestamps:false
+  })
 };
