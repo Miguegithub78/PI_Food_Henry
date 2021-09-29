@@ -9,7 +9,8 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true 
-    },  
+    },
+
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -20,21 +21,21 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     
-    Score: {
+    score: {
       type: DataTypes.FLOAT
     },
+
     healthScore:{
       type: DataTypes.FLOAT
     },
+
     image: {
       type: DataTypes.STRING
     },
-    Steps: {
+
+    steps: {
       type: DataTypes.TEXT
-    }
-    
-  },
-  {
-    timestamps:false
+    },
+
   })
 };
