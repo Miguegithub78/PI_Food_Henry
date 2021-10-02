@@ -26,8 +26,8 @@ const getApiInfo = async () => {
                     idApi: result.id, 
                     score: result.spoonacularScore,
                     healthScore: result.healthScore,
-                    types: result.dishTypes,  
-                    diets: result.diets, 
+                    types: result.dishTypes?.map(element => element),  
+                    diets: result.diets?.map(element => element), 
                     summary:result.summary, 
                     steps: (result.analyzedInstructions[0] && result.analyzedInstructions[0].steps?result.analyzedInstructions[0].steps.map(item=>item.step).join(" \n"):'')
                 }        
@@ -56,8 +56,8 @@ const getApiByName = async (name) => {
                 idApi: result.id, 
                 score: result.spoonacularScore,
                 healthScore: result.healthScore,
-                types: result.dishTypes,  
-                diets: result.diets, 
+                types: result.dishTypes?.map(element => element),  
+                diets: result.diets?.map(element => element), 
                 summary:result.summary, 
                 steps: (result.analyzedInstructions[0] && result.analyzedInstructions[0].steps?result.analyzedInstructions[0].steps.map(item=>item.step).join(" \n"):'')
             }
@@ -167,7 +167,19 @@ router.get('/:id', async (req, res) => {
 
             let obj = {};
 
-            obj = {name: resAxios.data.title, image: resAxios.data.image, idApi: resAxios.data.id, score: resAxios.data.spoonacularScore,  diets: resAxios.data.diets, summary:resAxios.data.summary, steps: resAxios.data.instructions}
+            obj = {
+                name: resAxios.data.title, 
+                vegetarian: resAxios.data.vegetarian,
+                vegan: resAxios.data.vegan,
+                glutenFree: resAxios.data.glutenFree,
+                dairyFree: resAxios.data.dairyFree,
+                image: resAxios.data.image, 
+                idApi: resAxios.data.id, 
+                score: resAxios.data.spoonacularScore, 
+                healthScore: resAxios.data.healthScore, 
+                diets: resAxios.data.diets?.map(element => element),types: resAxios.data.dishTypes?.map(element => element), 
+                summary:resAxios.data.summary, 
+                steps: resAxios.data.instructions}
             
             if (obj){
                 res.json(obj);
