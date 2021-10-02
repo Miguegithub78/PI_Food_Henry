@@ -1,0 +1,37 @@
+.Home {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-size: 24px;
+  border-radius: 8px;
+  background-color: #d1c4e9;
+}
+
+.Fuente {
+  color: wheat;
+}
+
+.Landing {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  height: 14rem;
+  width: 35rem;
+  background-color: rgba(19, 15, 236, 0.3);
+  box-shadow: 10px 13px 47px 3px rgba(0, 0, 0, 0.71);
+  -webkit-box-shadow: 10px 13px 47px 3px rgba(0, 0, 0, 0.71);
+  -moz-box-shadow: 10px 13px 47px 3px rgba(0, 0, 0, 0.71);
+}
+
+.Cover {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -1,0 +1,32 @@
+.cover {
+  position: relative;
+  width: 250px;
+  height: 450px;
+  background-color: antiquewhite;
+  width: 16rem;
+  border-radius: 12px;
+  display: column;
+  box-shadow: 10px 13px 47px 3px rgba(194, 156, 245, 0.71);
+  -webkit-box-shadow: 10px 13px 47px 3px rgba(194, 156, 245, 0.71);
+  -moz-box-shadow: 10px 13px 47px 3px rgba(194, 156, 245, 0.71);
+  margin-left: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  background: rgb(129, 128, 240);
+  height: 80px;
+  padding: 5px;
+  border-radius: 12px 12px 0px 0px;
+  margin-bottom: 1rem;
+}
+
+.foot {
+  display: inline-flex;
+  width: 18rem;
+}
+
+.diets {
+  margin-left: 1rem;
+  width: 130px;
+}
