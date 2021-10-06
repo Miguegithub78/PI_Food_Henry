@@ -91,7 +91,7 @@ const getInfoByName = async (name) => {
 
 const getDBInfo = async () => {
     try{
-        return await Recipe.findAll({ 
+        const dataDB = await Recipe.findAll({ 
             include:{
                 model: Diet,
                 attributes: ['name'],
@@ -100,6 +100,18 @@ const getDBInfo = async () => {
                 }
             }
         })
+        result = dataDB?.map(recipe => {
+            return {
+                id: recipe.id,
+                name: recipe.name,
+                summary: recipe.summary,
+                score: recipe.score,
+                healthScore: recipe.healthScore,
+                steps: recipe.steps,
+                diets: recipe.diets?.map(diet => diet.name),
+            }
+        })
+        return result
     }catch(err) {
         return ('error')
     }
@@ -156,8 +168,17 @@ router.get('/:id', async (req, res) => {
                     },
                 },
             });
-            if (dataDB){
-                res.json(dataDB)
+            if(dataDB){
+            const obj = {
+                id: dataDB.id,
+                name: dataDB.name,
+                summary: dataDB.summary,
+                score: dataDB.score,
+                healthScore: dataDB.healthScore,
+                steps: dataDB.steps,
+                diets: dataDB.diets?.map(diet => diet.name)
+            }
+                res.json(obj)
             }else{
                 res.status(404).json({messaje:'no se obtuvo resultados'})
             }
