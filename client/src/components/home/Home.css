@@ -1,3 +1,174 @@
 .cards {
   display: inline-flex;
 }
+
+.option {
+  left: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  bottom: 1rem;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 300px;
+  height: 600px;
+}
+
+.body {
+  height: 600px;
+  top: 90px;
+  left: 300px;
+  overflow: scroll;
+  position: absolute;
+}
+
+.filter {
+  display: inline-block;
+  position: static;
+  left: 0;
+}
+
+.order {
+  height: 80px;
+  width: 150px;
+}
+
+.link {
+  width: 150px;
+}
+
+.source {
+  height: 80px;
+  width: 150px;
+}
+
+.resetDefault {
+  width: 150px;
+}
+
+.diets {
+  height: 300px;
+  width: 150px;
+}
+
+.pag-body {
+  width: 900px;
+}
+
+.pagination {
+  bottom: 30px;
+  left: 850px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #5327f3;
+  background-image: none;
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: "Open Sans", sans-serif;
+}
+select::-ms-expand {
+  display: none;
+}
+.select {
+  position: relative;
+  display: flex;
+  margin-top: 0.5rem;
+  width: 15em;
+  height: 3em;
+  line-height: 3;
+  background: #5439eb;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #8043e2;
+  cursor: pointer;
+  pointer-events: none;
+  transition: 0.25s all ease;
+}
+.select:hover::after {
+  color: #23b499;
+}
+
+.btn-neon {
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  color: #fff;
+  letter-spacing: 4px;
+  text-decoration: none;
+  font-size: 16px;
+  overflow: hidden;
+  transition: 0.2s;
+  margin-top: 0.5rem;
+  width: 15em;
+  background-color: #5439eb;
+}
+.btn-neon:hover {
+  background: #8e43f1;
+  box-shadow: 0 0 10px #8e43f1, 0 0 40px #8e43f1, 0 0 80px #8e43f1;
+}
+.btn-neon span {
+  position: absolute;
+  display: block;
+}
+#span1 {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #8e43f1);
+}
+.btn-neon:hover #span1 {
+  left: 100%;
+}
+#span3 {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #8e43f1);
+}
+.btn-neon:hover #span3 {
+  right: 100%;
+
+  transition-delay: 0.5s;
+}
+#span2 {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #8e43f1);
+}
+.btn-neon:hover #span2 {
+  top: 100%;
+
+  transition-delay: 0.25s;
+}
+#span4 {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #8e43f1);
+}
+.btn-neon:hover #span4 {
+  bottom: 100%;
+
+  transition-delay: 0.75s;
+}

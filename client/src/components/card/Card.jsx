@@ -20,7 +20,7 @@ function Card({ name, image, diets, types}) {
             
                 <div className = 'types'>
                     <h4 >Dish Types</h4>
-                    {types?.map((dish, index)=> <p key={index} >{dish}</p>)}
+                    {types?.map((dish, index)=> <p key={index} >{dish.name ? dish.name : dish}</p>)}
                 </div>
             </div>
         </div>
