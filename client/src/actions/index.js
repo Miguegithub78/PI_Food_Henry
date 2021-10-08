@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_RECIPES, GET_RECIPES_NAME, GET_RECIPES_ID, GET_TYPES, FILTER_BY_DIETS, SET_DEFAULT_CARD, FILTER_BY_RESOURCES, FILTER_BY_ORDER} from './constants'
+import {GET_RECIPES, GET_RECIPES_NAME, GET_RECIPES_ID, GET_TYPES, FILTER_BY_DIETS, SET_DEFAULT_CARD, FILTER_BY_RESOURCES, FILTER_BY_ORDER, FILTER_BY_SEARCHBAR, ORDER_BY_SCORE, POST_RECIPES} from './constants'
 
 export function getRecipesAll(){
     return async function(dispatch){
@@ -25,6 +25,20 @@ export function getRecipesName(name) {
             })
         } catch (error) {
             console.log(error);
+        }
+    }
+}
+
+export function postRecipes(payload){
+    return async function(dispatch) {
+        try {
+            console.log(payload)
+            const response = await axios.post('http://localhost:3001/recipe', payload)
+            console.log(response)
+            return response
+
+        }catch(error){
+            console.log(error)
         }
     }
 }
@@ -80,9 +94,22 @@ export function filterByResources(payload){
 }
 
 export function filterByOrder(payload){
-    console.log(payload)
     return {
         type: FILTER_BY_ORDER,
+        payload: payload
+    }
+}
+
+export function orderByScore(payload){
+    return{
+        type: ORDER_BY_SCORE,
+        payload: payload
+    }
+}
+
+export function searchBarName(payload) {
+    return {
+        type: FILTER_BY_SEARCHBAR,
         payload: payload
     }
 }

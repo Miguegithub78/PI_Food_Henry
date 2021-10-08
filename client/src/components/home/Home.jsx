@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState, useEffect} from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { getRecipesAll, getTypes, getFilterByDiets, setDefaultCards, filterByResources, filterByOrder } from '../../actions';
+import { getRecipesAll, getTypes, getFilterByDiets, setDefaultCards, filterByResources, filterByOrder, orderByScore } from '../../actions';
 import { Link } from 'react-router-dom';
-import { Card } from '../card/Card.jsx'
+import { Card } from '../card/Card.jsx';
+import { SearchBar } from '../searchBar/SearchBar.jsx'
 import './Home.css';
 import Pagination from '../pagination/Pagination.jsx'
 
@@ -17,7 +18,7 @@ export default function Home (){
     useEffect(() => {
         dispatch(getTypes())
     }, [])
-    const [orde, setOrder] = useState('')
+    const [order, setOrder] = useState('')
 
     const [currenPage, setCurrentPage] = useState(1)
     const [recipesPage, setRecipesPage] = useState(9) 
@@ -32,14 +33,20 @@ export default function Home (){
     function handleDefault(e){
         console.log("default")
         dispatch(setDefaultCards())
+        setCurrentPage(1)
+        setOrder(`${e.target.value}`)
     }
 
     function handleFilterByDiets(evt){
         dispatch(getFilterByDiets(evt.target.value))
+        setCurrentPage(1)
+        setOrder(`${evt.target.value}`)
     }
 
     function handleFilterBySource(evt){
         dispatch(filterByResources(evt.target.value))
+        setCurrentPage(1)
+        setOrder(`${evt.target.value}`)
     }
 
     function handleFilterByOrder(evt){
@@ -49,9 +56,18 @@ export default function Home (){
         setOrder(`${evt.target.value}`)
     }
 
+    function handleOrderByScore(evt){
+        evt.preventDefault()
+        dispatch(orderByScore(evt.target.value))
+        setCurrentPage(1)
+        setOrder(`${evt.target.value}`)
+    }
+
     return(
             <div>
-                
+                <div>
+                    <SearchBar/>
+                </div>
                 <div className = 'option'>
 
                     <div className = "select">
@@ -73,6 +89,13 @@ export default function Home (){
                             <option disabled>Filter by type</option>
                             {typesAll?.map((type) => <option key={type.name} value={type.name}>{type.name}</option>)}
                         </select>  
+                    </div>
+                    <div className = 'select'>
+                        <select defaultValue='Order by score' onChange={evt => handleOrderByScore(evt)}>
+                            <option disabled>Order by score</option>
+                            <option key= 'SSc' value= 'SSc'>Spooncular Score</option>
+                            <option key= 'HSc' value= 'HSc'>health Score</option>
+                        </select>
                     </div>
                     <div className = 'resetDefault'>
                         <button className='btn-neon' onClick={(e) => handleDefault(e)}>Reset Default</button>
