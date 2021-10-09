@@ -154,6 +154,15 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/dates', async (req, res) => {
+    const allDateBD = await getDBInfo()
+    if (allDateBD !== 'error') {
+        res.json(allDateBD)
+    } else {
+        res.status(404).json({message: 'error in database '})
+    }
+})
+
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     
