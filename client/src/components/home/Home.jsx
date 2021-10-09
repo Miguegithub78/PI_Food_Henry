@@ -26,6 +26,9 @@ export default function Home (){
     const indexFirstRecipe = indexLastRecipe - recipesPage
     const currentRecipes = recipesAll.slice(indexFirstRecipe, indexLastRecipe)
  
+    console.log(recipesAll)   
+    
+    
     const Page = (pageNumber) => {
         setCurrentPage(pageNumber)
     }
@@ -117,7 +120,7 @@ export default function Home (){
                     <div  className='body'>
                     {currentRecipes?.map((recipe, index) => {
                     return(    
-                        <div className='cards' key={index} > 
+                        <div className='cards' key={index}> 
                             <Card key={recipe.id} name={recipe.name} image={recipe.image} types={recipe.types} diets={recipe.diets}/>
                         </div>
                         )

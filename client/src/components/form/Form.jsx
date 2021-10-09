@@ -1,5 +1,5 @@
 import React from 'react'
-import { getTypes, postRecipes, getRecipesAll } from '../../actions/index.js'
+import { getTypes, postRecipes, getDatabase } from '../../actions/index.js'
 import { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector} from 'react-redux'
@@ -70,7 +70,7 @@ export default function Form() {
             steps: '',
             diets: []
         })
-        dispatch(getRecipesAll())
+        dispatch(getDatabase())
         history.push('/home')
     }
 

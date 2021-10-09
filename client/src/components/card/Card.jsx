@@ -16,13 +16,17 @@ function Card({ name, image, diets, types}) {
                     <h4>Diets Types</h4>
                     {diets?.map((diet, index) => <p key={index} >{diet}</p>)}
                 </div>
-      
             
                 <div className = 'types'>
                     <h4 >Dish Types</h4>
                     {types?.map((dish, index)=> <p key={index} >{dish.name ? dish.name : dish}</p>)}
                 </div>
+  
             </div>
+                <div className = 'buton'>
+                    <button className = 'btn-neon'>Details</button>
+                </div>
+
         </div>
     )
 }

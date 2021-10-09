@@ -1,4 +1,4 @@
-import {GET_RECIPES, GET_RECIPES_NAME, GET_RECIPES_ID, GET_TYPES, FILTER_BY_DIETS, SET_DEFAULT_CARD,FILTER_BY_RESOURCES, FILTER_BY_ORDER, FILTER_BY_SEARCHBAR, ORDER_BY_SCORE, POST_RECIPES} from '../actions/constants.js'
+import {GET_RECIPES, GET_RECIPES_NAME, GET_RECIPES_ID, GET_TYPES, FILTER_BY_DIETS, SET_DEFAULT_CARD,FILTER_BY_RESOURCES, FILTER_BY_ORDER, FILTER_BY_SEARCHBAR, ORDER_BY_SCORE, POST_RECIPES, GET_DATABASE} from '../actions/constants.js'
 const inicialState ={
     recipes: [],
     recipesAll: [],
@@ -61,6 +61,18 @@ const rootReducer = (state = inicialState, action) => {
                 recipes: recipes
             }
 
+            case GET_DATABASE:
+                const datBase = state.recipesAll.filter(recipe => { if (recipe.hasOwnProperty('idApi')) return recipe
+                })
+                const joinAll = datBase.concat(action.payload)
+                
+                return{
+                    ...state,
+                    dates: action.payload,
+                    recipes: joinAll,
+                    recipesAll: joinAll
+                }
+
         case FILTER_BY_RESOURCES:
             const recipesToFilter = state.recipesAll
             const typeFilter = action.payload === 'Filter by Source' ? state.recipesAll : recipesToFilter?.filter(recipe =>{ 
@@ -104,7 +116,7 @@ const rootReducer = (state = inicialState, action) => {
 
         case FILTER_BY_SEARCHBAR:
             const filtSearch = state.recipesAll
-            const filtOnState = filtSearch.filter((recipe) =>{
+            const filtOnState = filtSearch.filter((recipe) => {
                 let name = recipe.name.toLowerCase() 
                 if (name.includes(action.payload)) return recipe
             })

@@ -1,9 +1,8 @@
 .cover {
   position: relative;
-  width: 250px;
   height: 450px;
   background-color: antiquewhite;
-  width: 16rem;
+  width: 20rem;
   border-radius: 12px;
   display: column;
   box-shadow: 10px 13px 47px 3px rgba(194, 156, 245, 0.71);
@@ -24,9 +23,36 @@
 .foot {
   display: inline-flex;
   width: 18rem;
+  height: 130px;
 }
 
 .diets {
-  margin-left: 1rem;
-  width: 130px;
+  margin-left: 0.2rem;
+  width: 40%;
+  height: 125px;
+}
+
+.types {
+  margin: left 0.5em;
+  width: 40%;
+  height: 125px;
+}
+
+.image:hover {
+  border-radius: 20%;
+  -webkit-border-radius: 20%;
+  transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  filter: saturate(180%);
+}
+
+.btn-neon {
+  margin-top: 5rem;
+  position: absolute;
+  bottom: -10px;
+}
+
+.buton {
+  margin-top: 40px;
+  bottom: 4 px;
 }
