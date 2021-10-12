@@ -36,7 +36,7 @@ const getApiInfo = async () => {
         return response;
     } 
     }catch (e) {
-        return ('error')
+        return ([])
     }
 }
 
@@ -100,7 +100,7 @@ const getDBInfo = async () => {
                 }
             }
         })
-        result = dataDB?.map(recipe => {
+        result = await dataDB?.map(recipe => {
             return {
                 id: recipe.id,
                 name: recipe.name,
