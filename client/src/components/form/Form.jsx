@@ -17,7 +17,8 @@ import './Form.css'
 export default function Form() {
     const dispatch = useDispatch()
     const history = useHistory()
-    const type = useSelector(state => state.types) 
+    const type = useSelector(state => state.types)
+    const allState = useSelector(state => state.recipesAll)
     const [error, setError] = useState({})
 
     const [input, setInput] = useState({
@@ -25,7 +26,7 @@ export default function Form() {
         summary: '',
         score: 0, 
         healthScore: 0,
-        image: '',
+        image: 'https://vegano.club/wp-content/uploads/2019/11/comidas-veganas.jpg',
         steps: '',
         diets: []
     })
@@ -43,6 +44,12 @@ export default function Form() {
             ...input,
             [evt.target.name]:evt.target.value
         }))
+        if(allState.find(recipe => recipe.name.toLowerCase() === evt.target.value.toLowerCase())){
+            setError({
+                ...input,
+                [evt.target.name]: 'Recipe is found'
+            })
+        }
         console.log(input)
     }
 
@@ -88,11 +95,12 @@ export default function Form() {
             summary: '',
             score: 0, 
             healthScore: 0,
-            image: '',
+            image: 'https://vegano.club/wp-content/uploads/2019/11/comidas-veganas.jpg',
             steps: '',
             diets: []
         })
-        await dispatch(getDatabase())
+        const result = await dispatch(getDatabase())
+        console.log(result)
         history.push('/home')
     }
 
@@ -175,11 +183,11 @@ export default function Form() {
                             {type?.map((type) => <option key={type.name} value={type.name}>{type.name}</option>)}
                     </select>  
                 </div>
-                {(input.name !== '') ?
+                {((input.name !== '') && (!error.name)) ?
                 <div>
                     <button className = 'btn-neon' type='submit'>Recipes Create</button>
                 </div>
-                : <p className="error">Name is require</p>
+                : <p className="error">Name is require or duplicate input</p>
                 }
             </form>
             <div className = 'typ'>

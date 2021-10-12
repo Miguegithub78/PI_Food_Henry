@@ -26,7 +26,7 @@ export default function Home (){
     const indexFirstRecipe = indexLastRecipe - recipesPage
     const currentRecipes = recipesAll.length ? recipesAll.slice(indexFirstRecipe, indexLastRecipe) : []
  
-    console.log(recipesAll)   
+    console.log(recipesAll, 'error')   
     
     
     const Page = (pageNumber) => {
