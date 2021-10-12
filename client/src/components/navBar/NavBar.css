@@ -9,3 +9,7 @@
   z-index: 5;
   background-image: linear-gradient(-225deg, #fffeff 0%, #d7fffe 100%);
 }
+
+.contimg {
+  display: inline-flex;
+}
