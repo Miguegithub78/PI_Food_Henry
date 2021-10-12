@@ -107,6 +107,7 @@ const getDBInfo = async () => {
                 summary: recipe.summary,
                 score: recipe.score,
                 healthScore: recipe.healthScore,
+                image: recipe.image,
                 steps: recipe.steps,
                 diets: recipe.diets?.map(diet => diet.name),
             }
@@ -137,9 +138,9 @@ router.get('/', async (req, res) => {
   
         const infoByName = await getInfoByName(name)
         if (infoByName !== 'error'){
-            infoByName.length > 0 ? res.json(infoByName) : res.status(400).json({ message: 'no se encontraron coincidencias'});
+            infoByName.length > 0 ? res.json(infoByName) : res.status(400).json([{ name: 'not foun any recipes'}]);
         }else{
-            res.status(404).json({ message: 'Error en la búsqueda de datos'})
+            res.status(404).json([{ name: 'API Error'}])
         }
 
     }else{
@@ -184,12 +185,23 @@ router.get('/:id', async (req, res) => {
                 summary: dataDB.summary,
                 score: dataDB.score,
                 healthScore: dataDB.healthScore,
+                image: dataDB.image,
                 steps: dataDB.steps,
                 diets: dataDB.diets?.map(diet => diet.name)
             }
                 res.json(obj)
             }else{
-                res.status(404).json({messaje:'no se obtuvo resultados'})
+                console.log('bd')
+                const objerr = {
+                    name: 'Recipe not Found',
+                    summary: 'None',
+                    score: 0,
+                    healthScore: 0,
+                    image: 'https://www.knownhost.com/blog/wp-content/uploads/2017/11/404-Error-Message.jpg',
+                    steps: 'none',
+                    diets: []
+                }
+                res.json(objerr)
             }
         }else{
 
@@ -214,11 +226,33 @@ router.get('/:id', async (req, res) => {
             if (obj){
                 res.json(obj);
             }else{
-                res.status(404).json({message: 'no se encontraron coincidencias'})
+
+                let objerrors
+
+                objerrors = {
+                    name: 'Recipe not Found', 
+                    image: 'https://www.knownhost.com/blog/wp-content/uploads/2017/11/404-Error-Message.jpg',  
+                    score: 0, 
+                    healthScore: 0, 
+                    diets: [], 
+                    summary:'none', 
+                    steps: 'none'}
+
+                res.json(objerrors)
             }
         }
     }catch(e){
-        res.status(404).json({message:'error en la búsqueda'})
+        let objerr
+    
+        objerr = {name: 'only enter numbers less than 100000 or UUID code', 
+        image: 'https://www.knownhost.com/blog/wp-content/uploads/2017/11/404-Error-Message.jpg',  
+        score: 0, 
+        healthScore: 0, 
+        diets: [], 
+        summary:'none', 
+        steps: 'none'}
+
+    res.json(objerr)
     }
 })
 
