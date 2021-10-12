@@ -1,15 +1,25 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import './NavBar.css'
 
-function NavBar({types}) {
+import spoonacular from '../../assets/spoonacular.svg'
+
+function NavBar() {
+
+
     return (
-        <div>
-            <Link to='/Recipes'>Add Recipes</Link>
-            <h1>API Recipes</h1>
-
-            <select>
-
-            </select>
+        <div className="navigation">
+            <div>
+                <img 
+                    src={spoonacular}
+                    alt = 'image not found'
+                />
+            </div>
+            <div>
+                <Link to='/home'>
+                    <button className='btn-neon'>Home</button>
+                </Link>
+            </div>
         </div>
     )
 }

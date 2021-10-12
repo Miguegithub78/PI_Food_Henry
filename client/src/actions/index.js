@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {GET_RECIPES, GET_RECIPES_NAME, GET_RECIPES_ID, GET_TYPES, FILTER_BY_DIETS, SET_DEFAULT_CARD, FILTER_BY_RESOURCES, FILTER_BY_ORDER, FILTER_BY_SEARCHBAR, ORDER_BY_SCORE, GET_DATABASE} from './constants'
+import {GET_RECIPES, GET_RECIPES_NAME, GET_RECIPES_ID, GET_TYPES, FILTER_BY_DIETS, SET_DEFAULT_CARD, FILTER_BY_RESOURCES, FILTER_BY_ORDER, FILTER_BY_SEARCHBAR, ORDER_BY_SCORE, GET_DATABASE, GET_STATE_ID} from './constants'
 
 export function getRecipesAll(){
     return async function(dispatch){
@@ -125,6 +125,13 @@ export function orderByScore(payload){
 export function searchBarName(payload) {
     return {
         type: FILTER_BY_SEARCHBAR,
+        payload: payload
+    }
+}
+
+export function searchId(payload) {
+    return {
+        type: GET_STATE_ID,
         payload: payload
     }
 }

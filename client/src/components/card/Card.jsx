@@ -1,7 +1,18 @@
 import React from 'react'
-import Cardcss from './Card.css'
+import { useDispatch} from 'react-redux';
+import { searchId } from '../../actions/index.js'
+import {  useHistory } from 'react-router-dom'
+import './Card.css'
+import spoonacular from '../../assets/spoonacular.svg'
 
-function Card({ name, image, diets, types}) {
+function Card({id, name, image, diets, types}) {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    
+    async function handleId(id){
+        await dispatch(searchId(id))
+        history.push('/detail')
+    }
 
     return (
         <div className ='cover'>
@@ -9,7 +20,7 @@ function Card({ name, image, diets, types}) {
                 <h3>{name}</h3>   
             </div>
             <div className = 'image'>
-                <img src={image} alt= "img not found" width ="150px" height ="100px"/>   
+                <img src={image} alt= 'image not Found' width ="150px" height ="100px"/>   
             </div>
             <div className='foot'>
                 <div className = 'diets'>
@@ -24,7 +35,7 @@ function Card({ name, image, diets, types}) {
   
             </div>
                 <div className = 'buton'>
-                    <button className = 'btn-neon'>Details</button>
+                    <button className = 'btn-neon' onClick={() => handleId(id)}>Details</button>
                 </div>
 
         </div>

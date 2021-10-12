@@ -24,7 +24,7 @@ export default function Home (){
     const [recipesPage, setRecipesPage] = useState(9) 
     const indexLastRecipe = currenPage * recipesPage
     const indexFirstRecipe = indexLastRecipe - recipesPage
-    const currentRecipes = recipesAll.slice(indexFirstRecipe, indexLastRecipe)
+    const currentRecipes = recipesAll.length ? recipesAll.slice(indexFirstRecipe, indexLastRecipe) : []
  
     console.log(recipesAll)   
     
@@ -117,15 +117,17 @@ export default function Home (){
                     </div>
                 </div>
                 <div className = 'pag-body'>
+                    {recipesAll.length > 0 ?
                     <div  className='body'>
                     {currentRecipes?.map((recipe, index) => {
                     return(    
                         <div className='cards' key={index}> 
-                            <Card key={recipe.id} name={recipe.name} image={recipe.image} types={recipe.types} diets={recipe.diets}/>
+                            <Card key={recipe.id} id={recipe.idApi ? recipe.idApi : recipe.id} name={recipe.name} image={recipe.image} types={recipe.types} diets={recipe.diets}/>
                         </div>
                         )
                     })}
                     </div>
+                    : <img src='../../assets/404-error.jpg'></img>}
                 </div>
                 
                 <div className = 'pagination'>

@@ -1,12 +1,14 @@
-import {GET_RECIPES, GET_RECIPES_NAME, GET_RECIPES_ID, GET_TYPES, FILTER_BY_DIETS, SET_DEFAULT_CARD,FILTER_BY_RESOURCES, FILTER_BY_ORDER, FILTER_BY_SEARCHBAR, ORDER_BY_SCORE, POST_RECIPES, GET_DATABASE} from '../actions/constants.js'
+import {GET_RECIPES, GET_RECIPES_NAME, GET_RECIPES_ID, GET_TYPES, FILTER_BY_DIETS, SET_DEFAULT_CARD,FILTER_BY_RESOURCES, FILTER_BY_ORDER, FILTER_BY_SEARCHBAR, ORDER_BY_SCORE, POST_RECIPES, GET_DATABASE, GET_STATE_ID} from '../actions/constants.js'
 const inicialState ={
     recipes: [],
     recipesAll: [],
-    types: []
+    types: [],
+    detail: []
 }
 const rootReducer = (state = inicialState, action) => {
     switch (action.type) {
         case GET_RECIPES: 
+            console.log(action.payload)
             return {
                 ...state,
                 recipes: action.payload,
@@ -14,15 +16,25 @@ const rootReducer = (state = inicialState, action) => {
             }
 
         case GET_RECIPES_NAME:
+            const addRecipe = state.recipesAll
+            const nameRecipes = addRecipe.map(recipe => recipe.name)
+            const newRecipeAdd = action.payload?.map(recipe => { 
+                if (!nameRecipes.includes(recipe.name)){
+                  addRecipe.push(recipe) 
+                  console.log(addRecipe) 
+                } 
+            })
             return {
                 ...state,
-                recipes: action.payload
+                recipes: action.payload,
+                recipesAll: addRecipe
             }
 
         case GET_RECIPES_ID:
+            console.log(action.payload)
             return {
                 ...state,
-                recipes: action.payload
+                detail: action.payload
             }
 
         case POST_RECIPES:
@@ -87,10 +99,10 @@ const rootReducer = (state = inicialState, action) => {
 
         case FILTER_BY_ORDER:
             const recypesByOrder = action.payload === 'up' ? state.recipesAll.sort((a, b) => {
-                if (a.name > b.name) return 1
+                if (a.name.toLowerCase() > b.name.toLowerCase()) return 1
                 else return -1
             }): state.recipesAll.sort((a, b) => {
-                if (a.name < b.name) return 1
+                if (a.name.toLowerCase() < b.name.toLowerCase()) return 1
                 else return -1
             })
             return{
@@ -99,13 +111,13 @@ const rootReducer = (state = inicialState, action) => {
             }
         
         case ORDER_BY_SCORE:
-            console.log(action.payload)
+
             const recypesByScore = action.payload === 'SSc' ? state.recipesAll.sort((a, b) => {
-                console.log(a.score, b.score)
+                
                 if ((a.score - b.score) < 0) return 1
                 else return -1
             }) : state.recipesAll.sort((a, b) => {
-                console.log(a.healthScore, b.healthScore)
+                
                 if ((a.healthScore - b.healthScore) < 0) return 1
                 else return -1
             })
@@ -120,10 +132,25 @@ const rootReducer = (state = inicialState, action) => {
                 let name = recipe.name.toLowerCase() 
                 if (name.includes(action.payload)) return recipe
             })
-        return{
+            return{
                 ...state,
                 recipes: filtOnState   
             }
+
+        case GET_STATE_ID:
+            const filtId = state.recipesAll
+            const Idfind = filtId.find((recipe) => {
+                if(typeof action.payload === 'number'){
+                    if (recipe.idApi === action.payload) return recipe
+                } else {
+                    if (recipe.id === action.payload) return recipe
+                }
+            })
+            return{
+                ...state,
+                detail: Idfind
+            }
+
 
         default: return state
     }

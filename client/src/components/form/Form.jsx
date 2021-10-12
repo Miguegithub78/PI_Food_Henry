@@ -1,15 +1,24 @@
 import React from 'react'
 import { getTypes, postRecipes, getDatabase } from '../../actions/index.js'
 import { useState, useEffect } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector} from 'react-redux'
+import NavBar from '../navBar/NavBar.jsx'
 import './Form.css'
 
+    function validate(input){
+        let errors = {}
+        if(!input.name) {
+            errors.name = 'Name is require'
+        }
+        return errors
+    }
 
 export default function Form() {
     const dispatch = useDispatch()
     const history = useHistory()
     const type = useSelector(state => state.types) 
+    const [error, setError] = useState({})
 
     const [input, setInput] = useState({
         name: '',
@@ -30,8 +39,14 @@ export default function Form() {
             ...input,
             [evt.target.name]: evt.target.value
         })
+        setError(validate({
+            ...input,
+            [evt.target.name]:evt.target.value
+        }))
         console.log(input)
     }
+
+
 
     function handleSelect(evt){
         if(!input.diets.includes(evt.target.value)){
@@ -58,9 +73,16 @@ export default function Form() {
         console.log(input)
     }
 
-    function handleSubmit(evt){
+    function handleDelete(evt){
+        setInput({
+            ...input,
+            diets: input.diets.filter(diet => diet !== evt)
+        })
+    }
+
+    async function handleSubmit(evt){
         evt.preventDefault()
-        dispatch(postRecipes(input))
+        await dispatch(postRecipes(input))
         setInput({
             name: '',
             summary: '',
@@ -70,18 +92,18 @@ export default function Form() {
             steps: '',
             diets: []
         })
-        dispatch(getDatabase())
+        await dispatch(getDatabase())
         history.push('/home')
     }
 
     return (
         <div className="divForm">
             <div>
-                <h1>Recipes Create</h1>
+                <NavBar></NavBar>
             </div>
             <form  className= 'form-register' onSubmit={(evt) => handleSubmit(evt)}>
                 <div>
-                    <label>Name..:</label>
+                    <label>Name</label>
                     <input
                     className= "controls"
                         type="text"
@@ -89,10 +111,11 @@ export default function Form() {
                         name = 'name'
                         onChange = {evt => handleChange(evt)}
                     />
+                    {error.name && (<p className= 'error'>{error.name}</p>)}
                 </div>
 
                 <div>
-                    <label>Summary..:</label>
+                    <label>Summary</label>
                     <input 
                         className= "controls"
                         type="text"
@@ -103,7 +126,7 @@ export default function Form() {
                 </div>
 
                 <div>
-                    <label>Score..:</label>
+                    <label>Score</label>
                     <input
                         className= "controls"
                         type="number"
@@ -114,7 +137,7 @@ export default function Form() {
                 </div>
 
                 <div>
-                    <label>Heath score..:</label>
+                    <label>Heath score</label>
                     <input
                         className= "controls"
                         type="number"
@@ -125,7 +148,7 @@ export default function Form() {
                 </div>
 
                 <div>
-                    <label>Image..:</label>
+                    <label>Image</label>
                     <input
                         className= "controls"
                         type="text"
@@ -136,7 +159,7 @@ export default function Form() {
                 </div>
 
                 <div>
-                    <label>Steps..:</label>
+                    <label>Steps</label>
                     <input
                         className= "controls"
                         type="text"
@@ -152,13 +175,17 @@ export default function Form() {
                             {type?.map((type) => <option key={type.name} value={type.name}>{type.name}</option>)}
                     </select>  
                 </div>
-                <ul className = 'controls'><li>{input.diets.map(el => el + ', ')}</li></ul>
+                {(input.name !== '') ?
                 <div>
                     <button className = 'btn-neon' type='submit'>Recipes Create</button>
                 </div>
-                
+                : <p className="error">Name is require</p>
+                }
             </form>
-            
+            <div className = 'typ'>
+                {input.diets.map((el, index) =><div className = 'ty' key = {index}><p>{el}</p>
+                <button className= 'but' onClick={() => handleDelete(el)}>x</button></div>)}
+            </div>
         </div>
     )
 }

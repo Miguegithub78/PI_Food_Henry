@@ -8,9 +8,10 @@
   margin-bottom: 0.5rem;
   margin-top: 0.5rem;
   bottom: 1rem;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(223, 220, 57, 0.6);
   width: 300px;
   height: 680px;
+  background-image: linear-gradient(to top, #c1dfc4 0%, #deecdd 100%);
 }
 
 .body {
@@ -67,7 +68,7 @@ select {
   outline: 0;
   box-shadow: none;
   border: 0 !important;
-  background: #5327f3;
+  background: #09cee0;
   background-image: none;
   flex: 1;
   padding: 0 0.5em;
@@ -75,6 +76,7 @@ select {
   cursor: pointer;
   font-size: 1em;
   font-family: "Open Sans", sans-serif;
+  background-image: linear-gradient(to right, #0acffe 0%, #495aff 100%);
 }
 select::-ms-expand {
   display: none;
@@ -86,7 +88,7 @@ select::-ms-expand {
   width: 15em;
   height: 3em;
   line-height: 3;
-  background: #5439eb;
+  background: #09cee0;
   overflow: hidden;
   border-radius: 0.25em;
 }
@@ -96,13 +98,13 @@ select::-ms-expand {
   top: 0;
   right: 0;
   padding: 0 1em;
-  background: #8043e2;
+  background: #09cee0;
   cursor: pointer;
   pointer-events: none;
   transition: 0.25s all ease;
 }
 .select:hover::after {
-  color: #23b499;
+  color: #9fe916;
 }
 
 .btn-neon {
@@ -118,10 +120,11 @@ select::-ms-expand {
   margin-top: 0.5rem;
   width: 15em;
   background-color: #5439eb;
+  background-image: linear-gradient(60deg, #96deda 0%, #50c9c3 100%);
 }
 .btn-neon:hover {
-  background: #8e43f1;
-  box-shadow: 0 0 10px #8e43f1, 0 0 40px #8e43f1, 0 0 80px #8e43f1;
+  background: #09cee0;
+  box-shadow: 0 0 10px linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
 }
 .btn-neon span {
   position: absolute;
@@ -132,7 +135,7 @@ select::-ms-expand {
   left: -100%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, #8e43f1);
+  background: linear-gradient(90deg, transparent, #43f1e8);
 }
 .btn-neon:hover #span1 {
   left: 100%;
@@ -142,7 +145,7 @@ select::-ms-expand {
   right: -100%;
   width: 100%;
   height: 2px;
-  background: linear-gradient(270deg, transparent, #8e43f1);
+  background: linear-gradient(270deg, transparent, #43f1e8);
 }
 .btn-neon:hover #span3 {
   right: 100%;
@@ -154,7 +157,7 @@ select::-ms-expand {
   right: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(180deg, transparent, #8e43f1);
+  background: linear-gradient(180deg, transparent, #43f1e8);
 }
 .btn-neon:hover #span2 {
   top: 100%;
@@ -166,7 +169,7 @@ select::-ms-expand {
   left: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(360deg, transparent, #8e43f1);
+  background: linear-gradient(360deg, transparent, #43f1e8);
 }
 .btn-neon:hover #span4 {
   bottom: 100%;
