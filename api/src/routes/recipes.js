@@ -89,9 +89,9 @@ const getInfoByName = async (name) => {
     }
 }
 
-const getDBInfo = async () => {
+const getDBInfo = () => {
     try{
-        const dataDB = await Recipe.findAll({ 
+        const dataDB = Recipe.findAll({ 
             include:{
                 model: Diet,
                 attributes: ['name'],
@@ -99,8 +99,8 @@ const getDBInfo = async () => {
                     attributes: []
                 }
             }
-        })
-        result = await dataDB?.map(recipe => {
+        }).then(r => r ).then(data => 
+        data?.map(recipe => {
             return {
                 id: recipe.id,
                 name: recipe.name,
@@ -112,7 +112,8 @@ const getDBInfo = async () => {
                 diets: recipe.diets?.map(diet => diet.name),
             }
         })
-        return result
+        )
+        return dataDB
     }catch(err) {
         return ('error')
     }
@@ -129,6 +130,36 @@ const getAllInfo = async () => {
     }
 }
 
+router.delete('/', async (req, res) => {
+    const {id} = req.query
+    let resul
+    try{
+        resul = await Recipe.destroy({
+            where: {id: id},
+        })
+  
+    }catch{
+        resul = null
+    }
+    if(resul === 1) res.status(200).send('success')
+    else res.status(404).send('reject')
+})
+
+router.put('/', async (req, res) => {
+    const {id, summary} = req.query
+    let resul
+    try{
+        resul = await Recipe.update(
+            {summary},
+            {where: {id: id}},
+        )
+  
+    }catch{
+        resul = null
+    }
+    if(resul === 1) res.status(200).send('success')
+    else res.status(404).send('reject')
+})
 
 router.get('/', async (req, res) => {
     
