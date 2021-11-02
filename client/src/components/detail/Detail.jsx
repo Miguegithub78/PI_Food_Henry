@@ -8,7 +8,7 @@ import spoonacular from '../../assets/spoonacular.png'
 
 function validate(id) {
 
-    if(id.length <= 6){
+    if((id.length <= 6)&&(id.length > 0)) {
         for(let i = 0; i < id.length; i++) {
             if(!Number.isInteger(id[i] * 1)) return false
         }

@@ -17,9 +17,10 @@ function SearchBar() {
 
     function handleSubmit(evt){
         evt.preventDefault();
-        console.log(name)
-        dispatch(getRecipesName(name));
-        setName('')
+        if(name){
+            dispatch(getRecipesName(name));
+            setName('')
+        }
     } 
 
     return (

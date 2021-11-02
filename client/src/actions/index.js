@@ -2,16 +2,16 @@ import axios from 'axios';
 import {GET_RECIPES, GET_RECIPES_NAME, GET_RECIPES_ID, GET_TYPES, FILTER_BY_DIETS, SET_DEFAULT_CARD, FILTER_BY_RESOURCES, FILTER_BY_ORDER, FILTER_BY_SEARCHBAR, ORDER_BY_SCORE, GET_DATABASE, GET_STATE_ID} from './constants'
 
 export function getRecipesAll(){
-    return async function(dispatch){
-        try{
-            const json = await axios.get('http://localhost:3001/recipes');
+    return  function(dispatch){
+             axios.get('/recipes')
+            .then((json) => {
             return dispatch({
                 type: GET_RECIPES,
                 payload: json.data
             })
-        } catch(error){
+        }).catch((error) => {
             console.log(error)
-        }
+        })
     }
 }
 
@@ -34,7 +34,7 @@ export function postRecipes(payload){
     return async function(dispatch) {
         try {
             console.log(payload)
-            const response = await axios.post('http://localhost:3001/recipe', payload)
+            const response = await axios.post('/recipe', payload)
             console.log(response)
             return response
 
@@ -47,7 +47,7 @@ export function postRecipes(payload){
 export function getRecipesId(id) {
     return async function (dispatch) {
         try {
-            let detail = await axios.get(`http://localhost:3001/recipes/${id}`)
+            let detail = await axios.get(`/recipes/${id}`)
             return dispatch({
                 type: GET_RECIPES_ID,
                 payload: detail.data
@@ -59,13 +59,15 @@ export function getRecipesId(id) {
 }
 
 export function getTypes() {
-    return async function (dispatch) {
+    return function (dispatch) {
         try {
-            let types = await axios.get(`http://localhost:3001/types`)
-            return dispatch({
+            axios.get(`/types`)
+            .then(types => 
+                 dispatch({
                 type: GET_TYPES,
                 payload: types.data
-            })
+                })
+            )
         } catch (error) {
             console.log(error);
         }
@@ -75,7 +77,7 @@ export function getTypes() {
 export function getDatabase() {
     return async function (dispatch) {
         try {
-            let dataBase = await axios.get(`http://localhost:3001/recipes/dates`)
+            let dataBase = await axios.get(`/recipes/dates`)
             return dispatch({
                 type: GET_DATABASE,
                 payload: dataBase.data
