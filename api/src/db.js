@@ -6,7 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST, DB_NAME
 } = process.env;
 
-let sequelize =
+const sequelize =
   process.env.NODE_ENV === "production"
     ? new Sequelize({
         database: DB_NAME,
@@ -34,20 +34,20 @@ let sequelize =
         `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/development`,
         { logging: false, native: false }
       );
+ 
 conn.sync({ force: true }).then(() => {
-  server.listen(process.env.PORT, () => {
+  server.listen(process.env.PORT || 3001, () => {
     console.log("%s listening at 3000"); // eslint-disable-line no-console
   });
 });
-import dotenv from "dotenv";
-dotenv.config();
+
 
 axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
-  logging: false, // set to console.log to see the raw SQL queries
-  native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
+//   logging: false, // set to console.log to see the raw SQL queries
+//   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+// });
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
